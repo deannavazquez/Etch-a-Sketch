@@ -25,7 +25,7 @@ function resetGrid() {
     }
 }
 
-createGrid(16)
+createGrid(16);
   
 let btn = document.querySelector(".reset");
 btn.onclick = resetGrid;
