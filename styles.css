@@ -9,22 +9,20 @@ body {
 }
 
 #container {
-    width: 800px;
+    width: 960px;
+    height: 960px;
     margin: 30px auto;
-    border: 2px solid black;
+    border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
 
 }
 
 .grid {
-  width: 15px;
-  height: 15px;
-  padding: 1em;
-  font-weight: 700;
-  color: var(--clr-light);
-  text-align: center;
-  border: 2px solid black;
+  flex: 0 0 calc(100% / var(--input));
+  height: calc(100% / var(--input));
+  box-sizing: border-box;
+  border: 1px solid black;
 }
 
 .reset {

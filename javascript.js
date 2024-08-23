@@ -1,33 +1,34 @@
 const container = document.querySelector("#container");
 
-for (let i = 1; i < (16 * 16) +1; i++) {
-    const gridItem = document.createElement("div");
-    gridItem.classList.add("grid");
-    container.appendChild(gridItem);
+function createGrid(squaresPerSide){
+    container.innerHTML = ""; // Clears existing grid
+    container.style.setProperty('--input', squaresPerSide); // Set CSS variable for the grid
+
+    for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
+        const gridItem = document.createElement("div");
+        gridItem.classList.add("grid");
+        container.appendChild(gridItem);
 
     // Attach the click event listener to each grid item
-    gridItem.addEventListener('mouseout', () => {
-        gridItem.style.backgroundColor = '#FF5161';
+    gridItem.addEventListener('mouseenter', () => {
+        gridItem.style.backgroundColor = '#000000';
     });
+  }
 }
 
 function resetGrid() {
-  
   let input = Number(window.prompt ("How many squares per side for new sketch?"));
-  container.innerHTML = '';
-  for (let i = 1; i < (input * input) +1; i++) {
-    const gridItem = document.createElement("div");
-    gridItem.classList.add("grid");
-    container.appendChild(gridItem);
+  if (input > 0 && input <= 100 ) {
+    createGrid(input)
+} else {
+        alert("Please enter a number between 1 and 100");
+    }
+}
 
-    // Attach the click event listener to each grid item
-    gridItem.addEventListener('mouseout', () => {
-        gridItem.style.backgroundColor = '#FF5161';
-    });
-} }
+createGrid(16)
   
-  let btn = document.querySelector(".reset");
-  btn.onclick = resetGrid;
+let btn = document.querySelector(".reset");
+btn.onclick = resetGrid;
 
   
 
