@@ -8,10 +8,10 @@ function createGrid(squaresPerSide){
         const gridItem = document.createElement("div");
         gridItem.classList.add("grid");
         container.appendChild(gridItem);
-
-    // Attach the click event listener to each grid item
-    gridItem.addEventListener('mouseenter', () => {
-        gridItem.style.backgroundColor = '#000000';
+        
+        var color = ["#FF0000", "#EF00FF", "#1100FF", "#00F7FF", "#00FF11"];  
+        gridItem.addEventListener('mouseenter', () => {
+        gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
     });
   }
 }
