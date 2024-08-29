@@ -20,13 +20,13 @@ function createGrid(squaresPerSide){
       gridItem.addEventListener('mouseenter', () => { // Activates drawing mode and changes the grid item's color to a random one when mouse is pressed.
         if (draw === true) {
       gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
-    }
-  });
+      }
+    });
 
-    gridItem.addEventListener('mouseup', () => { // Ends drawing mode and sets a random color when the mouse is released.
-      draw = false;
-    gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
-});
+      gridItem.addEventListener('mouseup', () => { // Ends drawing mode and sets a random color when the mouse is released.
+        draw = false;
+      gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
+    });
 
 
 
