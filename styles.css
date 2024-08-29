@@ -25,9 +25,24 @@ body {
   border: 1px solid black;
 }
 
-.reset {
-  width: 100px;
-  padding: 5px 20px 5px 15px;
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.reset, .clear {
   align-self: center;
   font-size: x-large;
+}
+
+.clear{
+  width: 175px;
+  padding: 10px;
+}
+
+.reset {
+  width: 175px;
+  padding: 5px 20px 5px 15px;
+
 }
