@@ -1,6 +1,8 @@
 const container = document.querySelector("#container");
 let draw = false;
 
+
+// Function to create grid with a given number of squares per side
 function createGrid(squaresPerSide){
     container.innerHTML = ""; // Clears existing grid
     container.style.setProperty('--input', squaresPerSide); // Set CSS variable for the grid
@@ -8,36 +10,41 @@ function createGrid(squaresPerSide){
     for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
       const gridItem = document.createElement("div");
         gridItem.classList.add("grid");
-        container.appendChild(gridItem);
-        
-      let color = ["#FF0000", "#EF00FF", "#1100FF", "#00F7FF", "#00FF11"];  
-
-      gridItem.addEventListener('mousedown', () => { /// Starts drawing mode and sets a random color when the mouse is pressed.
-        draw = true;
-      gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
-    });
-
-      gridItem.addEventListener('mouseenter', () => { // Activates drawing mode and changes the grid item's color to a random one when mouse is pressed.
-        if (draw === true) {
-      gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
+        container.appendChild(gridItem); 
       }
+    }
+
+    // Helper function to pick a random color
+    function getRandomColor() {
+      const colors = ["#FF0000", "#EF00FF", "#1100FF", "#00F7FF", "#00FF11"];  
+      return colors[(Math.floor(Math.random() * colors.length))];
+    }
+
+    // Function to handle drawing on grid items
+    function handleDrawing(event) {
+      if (draw || event.type === 'mousedown') {
+        event.target.style.backgroundColor = getRandomColor();
+      }
+}
+    
+// Function to set up event listeners
+function setupEventListeners() {
+  container.addEventListener('mousedown', () => draw = true);
+  container.addEventListener('mouseup', () => draw = false);
+  container.addEventListener('mouseleave', () => draw = false); // Stops drawing when mouse leaves the container
+  
+  container.addEventListener('mouseover', handleDrawing);
+  container.addEventListener('mousedown', handleDrawing);
+
+  const clearBtn = document.querySelector(".clear");
+  clearBtn.addEventListener('click', () => {
+    document.querySelectorAll('.grid').forEach(gridItem => {
+      gridItem.style.backgroundColor = "#FFFFFF";
     });
-
-      gridItem.addEventListener('mouseup', () => { // Ends drawing mode and sets a random color when the mouse is released.
-        draw = false;
-      gridItem.style.backgroundColor = color[(Math.floor(Math.random() * color.length))];
-    });
-
-
-
-        
-      let clearBtn = document.querySelector(".clear"); //button to clear grid coloring
-        clearBtn.addEventListener('click', () => {
-        gridItem.style.backgroundColor = "#FFFFFF";
-      });
-  }
+  });
 }
 
+// Function to prompt for grid size and recreate grid
 function sizeGrid() {
   let input = Number(window.prompt ("How many squares per side for new sketch?"));
   if (input > 0 && input <= 100 ) {
@@ -47,9 +54,11 @@ function sizeGrid() {
   }
 }
 
+// Initialize grid and event listeners
 createGrid(16);
+setupEventListeners();
   
-let btn = document.querySelector(".reset");
-btn.onclick = sizeGrid;
+const resetBtn = document.querySelector(".reset");
+resetBtn.onclick = sizeGrid;
 
 
